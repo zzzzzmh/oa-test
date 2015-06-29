@@ -8,32 +8,38 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.Resource;
+
 import javax.transaction.Synchronization;
+
+import com.lashou.oa.core.util.BeanUtils;
+import com.lashou.oa.core.util.ReflectUtils;
 
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
 import org.hibernate.criterion.Order;
+
 import org.hibernate.metadata.ClassMetadata;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.BeansException;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationEvent;
+
 import org.springframework.jdbc.core.JdbcTemplate;
+
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronizationAdapter;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
+
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
-
-
-import com.lashou.oa.core.util.BeanUtils;
-import com.lashou.oa.core.util.ReflectUtils;
 
 /**
  * 封装session和jdbcTemplate的基础类，不涉及泛型和CRUD操作.

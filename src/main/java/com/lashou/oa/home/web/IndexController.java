@@ -4,15 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.lashou.oa.account.service.UserService;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 
 @Controller
@@ -20,8 +14,6 @@ public class IndexController {
 	
 	private static Logger log = LoggerFactory.getLogger(IndexController.class);
 	
-	@Autowired
-	public UserService userService;
 	public IndexController() {}
 	
 	//@ResponseBody
@@ -34,6 +26,5 @@ public class IndexController {
 		log.trace("home trace test");
 		log.warn("home warning test");
 		return "home/index";
-		
 	}
 }
