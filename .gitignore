@@ -3,3 +3,7 @@ target/
 /.settings
 /.classpath
 /.project
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
