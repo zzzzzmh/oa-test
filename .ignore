@@ -1,2 +1,6 @@
 *.class
 targat/*
+.classpath
+.project
+.settings/*
+.externalToolBuilders/*
