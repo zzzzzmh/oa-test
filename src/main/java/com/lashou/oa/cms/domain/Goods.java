@@ -17,6 +17,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import javax.validation.constraints.NotNull;
+
 @Entity
 @Table(name="think_goods")
 public class Goods implements java.io.Serializable {
@@ -47,6 +50,7 @@ public class Goods implements java.io.Serializable {
 	}
 	
 	@Column(name="title")
+	@NotNull(message="{title.not.empty}")
 	public String getTitle() {
 		return title;
 	}
@@ -55,6 +59,7 @@ public class Goods implements java.io.Serializable {
 	}
 	
 	@Column(name="product",length=50)
+	@NotNull(message="product.not.empty")
 	public String getProduct() {
 		return product;
 	}
@@ -102,5 +107,9 @@ public class Goods implements java.io.Serializable {
 	
 	public void setDesc(GoodsDescripton desc) {
 		this.desc = desc;
+	}
+	
+	public String toString() {
+		return ReflectionToStringBuilder.toString(this); 
 	}
 }
