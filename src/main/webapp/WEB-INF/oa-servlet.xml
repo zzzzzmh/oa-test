@@ -23,4 +23,18 @@
 		<property name="maxUploadSize" value="1000000"/>
 	</bean>
 	
+	<bean id="messageSource"  
+       class="org.springframework.context.support.ReloadableResourceBundleMessageSource">  
+	    <property name="basename" value="classpath:messages"/>  
+	    <property name="fileEncodings" value="utf-8"/>  
+	    <property name="cacheSeconds" value="120"/>  
+	</bean>
+	<!-- 
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">  
+        <property name="providerClass"  value="org.hibernate.validator.HibernateValidator"/>  
+        <property name="validationMessageSource" ref="messageSource"/>  
+	</bean>
+	 -->
+	<bean name="/cms/test" class="com.lashou.oa.cms.web.TestController"></bean>
+	<bean name="/cms/databind" class="com.lashou.oa.cms.web.TestPropertyEditorController"/>
 </beans>

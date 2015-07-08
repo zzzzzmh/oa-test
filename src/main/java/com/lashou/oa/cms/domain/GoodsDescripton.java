@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
 @Entity
 @Table(name="think_goods_description")
 public class GoodsDescripton implements Serializable {
@@ -36,6 +38,10 @@ public class GoodsDescripton implements Serializable {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public String toString() {
+		return ReflectionToStringBuilder.toString(this); 
 	}
 	
 }
