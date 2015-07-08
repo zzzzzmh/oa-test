@@ -88,9 +88,9 @@
 	 <dependency>
 		<groupId>org.hibernate</groupId>
 		<artifactId>hibernate-validator</artifactId>
-		<version>4.0.0.GA</version>
+		<version>4.3.0.Final</version>
 	</dependency>
-	<!-- 
+	<!-- 4.0.0.GA
 	<dependency>
 		<groupId>org.hibernate</groupId>
 		<artifactId>hibernate-validator</artifactId>

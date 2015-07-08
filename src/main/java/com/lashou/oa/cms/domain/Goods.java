@@ -18,7 +18,8 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="think_goods")
@@ -50,7 +51,7 @@ public class Goods implements java.io.Serializable {
 	}
 	
 	@Column(name="title")
-	@NotNull(message="{title.not.empty}")
+	@NotEmpty(message="{title.not.empty}")
 	public String getTitle() {
 		return title;
 	}
@@ -59,7 +60,8 @@ public class Goods implements java.io.Serializable {
 	}
 	
 	@Column(name="product",length=50)
-	@NotNull(message="product.not.empty")
+	@NotEmpty(message="{product.not.empty}")
+	@Length(min=10,max=30,message="{product.length.error}")
 	public String getProduct() {
 		return product;
 	}

@@ -5,12 +5,18 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.hibernate.SessionFactory;
+
 import javax.validation.Valid;
+
+import junit.framework.Test;
+
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -56,27 +62,35 @@ public class GoodsController {
                 */
             	
                 String[] arr = err.getCodes();
+                System.out.println(err.getDefaultMessage());
+                //System.out.println(messageSource.getMessage(err.getDefaultMessage(), null, null));
+                /*
                 for(int i=0;i<arr.length;i++) {
                 	System.out.println(arr[i]);
                 	//System.out.println(messageSource.getMessage(arr[i], null, null));
                 }
-                
-               
+                */
             }
             
             System.out.println(goods.toString());
-            return "hehehe,这么二心";
+            //return "hehehe,这么二心";
+            //return new String[]{"hello", "", "world"};
             
-            
-            //return "cms/testPropertyEditor";
+            return "cms/testPropertyEditor";
             //return result.toString();
-            
 	     }
 		 
 		
 		
 		return goods.toString();
 	}
+	
+	@RequestMapping("/test")
+	@ResponseBody
+	public String Test(@RequestBody String str) {
+		return str;
+	}
+	
 	
 	@RequestMapping("/success")
 	@ResponseBody
