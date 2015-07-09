@@ -45,7 +45,7 @@ public class GoodsController {
 	}
 	
 	@RequestMapping(value="/addSubmit", method=RequestMethod.POST)
-	public String addSubmit(@Valid @ModelAttribute("goods") Goods goods, BindingResult result, 
+	public String addSubmit(@Valid @ModelAttribute("goods") Goods goods, BindingResult result,
 			@ModelAttribute("goodsDesc") GoodsDescripton goodsDesc) {
 		if(result.hasErrors()) {
 			List<FieldError> errors = result.getFieldErrors();
@@ -57,28 +57,27 @@ public class GoodsController {
 		
 		System.out.println(goods.toString());
 		System.out.println(goodsDesc.toString());
-		//return "";
 		
 		goods.setDesc(goodsDesc);
 		goodsDesc.setGoods(goods);
-		
+	
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;  
 	    try {
 	        transaction = session.beginTransaction();  
 	        transaction.begin(); 
-	        session.save(goods); 
+	        session.save(goods);
 	        transaction.commit();
 	    } catch (RuntimeException e) {  
 	    	if(transaction != null) {  
 	            transaction.rollback();  
 	        }
-	        System.out.println(e);
+	    	
+	        e.printStackTrace();
 	    } finally {
 	        session.close();
 	    }
 		return "redirect:cms/goods/success";
-		
 	}
 	
 	/*

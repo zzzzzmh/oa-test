@@ -111,8 +111,9 @@ public class Goods implements java.io.Serializable {
 	public void setDesc(GoodsDescripton desc) {
 		this.desc = desc;
 	}
-	
+	/*
 	public String toString() {
 		return ReflectionToStringBuilder.toString(this); 
 	}
+	*/
 }
