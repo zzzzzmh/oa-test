@@ -2,17 +2,18 @@ package com.lashou.oa.cms.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 @Entity
 @Table(name="think_goods_description")
@@ -21,9 +22,11 @@ public class GoodsDescripton implements Serializable {
 	
 	private Integer goodsId;
 	private String description;
+	private Goods goods;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GenericGenerator(name ="pkGenerator",strategy="foreign" ,parameters={@Parameter(name="property",value="goods")})
+    @GeneratedValue(generator="pkGenerator")
 	@Column(name="goods_id")
 	public Integer getGoodsId() {
 		return goodsId;
@@ -38,6 +41,13 @@ public class GoodsDescripton implements Serializable {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Goods getGoods() {
+		return goods;
+	}
+	public void setGoods(Goods goods) {
+		this.goods = goods;
 	}
 	
 	public String toString() {

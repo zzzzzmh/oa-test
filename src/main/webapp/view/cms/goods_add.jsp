@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
-
 <%@ include file="../common/header.jsp"%>
 <div id="main" class="container-fluid">
 	<div class="row">
@@ -17,7 +16,7 @@
 							</div>
 						</div>
 						<div class="box-content">
-							<form id="defaultForm" method="post" action="<c:url value='/cms/goods/addsub'/>" class="form-horizontal">
+							<form id="defaultForm" method="post" action="<c:url value='/cms/goods/addSubmit'/>" class="form-horizontal">
 								<fieldset>
 									<legend>Not Empty validator</legend>
 									<div class="form-group">
@@ -56,14 +55,14 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label">desc</label>
 										<div class="col-sm-5">
-											<textarea name="desc.description" class="form-control" rows="10" cols="17"></textarea>
+											<textarea name="description" class="form-control" rows="10" cols="17"></textarea>
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="col-sm-9 col-sm-offset-3">
 											<div class="checkbox">
 												<label>
-													<input type="checkbox"  name="status" /> 是否有效
+													<input type="checkbox"  name="status" value="1"/> 是否有效
 													<i class="fa fa-square-o small"></i>
 												</label>
 											</div>
@@ -73,7 +72,8 @@
 								
 								<div class="form-group">
 									<div class="col-sm-9 col-sm-offset-3">
-										<input type="hidden" name="spId" value="0" />
+										<input type="hidden" name="spId" value="200" />
+										<input type="hidden" name="cityId" value="2419" />
 										<button type="submit" class="btn btn-primary">Submit</button>
 									</div>
 								</div>

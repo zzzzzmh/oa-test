@@ -3,20 +3,17 @@ package com.lashou.oa.cms.web;
 import java.util.List;
 
 import javax.annotation.Resource;
-
-import org.hibernate.SessionFactory;
-
 import javax.validation.Valid;
 
-import junit.framework.Test;
-
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -47,6 +44,44 @@ public class GoodsController {
 		return mnv;
 	}
 	
+	@RequestMapping(value="/addSubmit", method=RequestMethod.POST)
+	public String addSubmit(@Valid @ModelAttribute("goods") Goods goods, BindingResult result, 
+			@ModelAttribute("goodsDesc") GoodsDescripton goodsDesc) {
+		if(result.hasErrors()) {
+			List<FieldError> errors = result.getFieldErrors();
+            for(FieldError err : errors) {
+            	System.out.println(err.getField() +" : "+ err.getDefaultMessage());
+            }
+			return "cms/goods_add";
+		}
+		
+		System.out.println(goods.toString());
+		System.out.println(goodsDesc.toString());
+		//return "";
+		
+		goods.setDesc(goodsDesc);
+		goodsDesc.setGoods(goods);
+		
+		Session session = sessionFactory.openSession();
+		Transaction transaction = null;  
+	    try {
+	        transaction = session.beginTransaction();  
+	        transaction.begin(); 
+	        session.save(goods); 
+	        transaction.commit();
+	    } catch (RuntimeException e) {  
+	    	if(transaction != null) {  
+	            transaction.rollback();  
+	        }
+	        System.out.println(e);
+	    } finally {
+	        session.close();
+	    }
+		return "redirect:cms/goods/success";
+		
+	}
+	
+	/*
 	@RequestMapping(value="/addsub", method=RequestMethod.POST)
 	@ResponseBody
 	public String addsub(@Valid @ModelAttribute("goods") Goods goods, BindingResult result, 
@@ -59,7 +94,7 @@ public class GoodsController {
                 		+ "\tFieldValue:" + err.getRejectedValue() + "\tMessage:" + err.getCodes());
                 System.out.println(err.getCode());
                 System.out.println(err.getCodes());
-                */
+                * /
             	
                 String[] arr = err.getCodes();
                 System.out.println(err.getDefaultMessage());
@@ -69,7 +104,7 @@ public class GoodsController {
                 	System.out.println(arr[i]);
                 	//System.out.println(messageSource.getMessage(arr[i], null, null));
                 }
-                */
+                *  /
             }
             
             System.out.println(goods.toString());
@@ -79,11 +114,10 @@ public class GoodsController {
             return "cms/testPropertyEditor";
             //return result.toString();
 	     }
-		 
-		
 		
 		return goods.toString();
 	}
+	 */ 
 	
 	@RequestMapping("/test")
 	@ResponseBody

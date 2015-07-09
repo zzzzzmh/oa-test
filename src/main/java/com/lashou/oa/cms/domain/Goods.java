@@ -94,6 +94,7 @@ public class Goods implements java.io.Serializable {
 	}
 	
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="add_time")
 	public Date getAddTime() {
 		return addTime;
 	}
