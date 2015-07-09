@@ -5,11 +5,6 @@
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 	
-	
-	<context:component-scan base-package="com.lashou.oa"/>
-	<mvc:annotation-driven/>
-	<mvc:default-servlet-handler/>
-	
 	<!-- <mvc:resources location="/static/" mapping="/static/**"></mvc:resources>  -->
 	<!-- <mvc:view-controller path="/" view-name="index.jsp"/>-->
 	
@@ -29,12 +24,19 @@
 	    <property name="fileEncodings" value="utf-8"/>  
 	    <property name="cacheSeconds" value="120"/>  
 	</bean>
-	<!-- 
-	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">  
-        <property name="providerClass"  value="org.hibernate.validator.HibernateValidator"/>  
-        <property name="validationMessageSource" ref="messageSource"/>  
-	</bean>
-	 -->
+	
+	
 	<bean name="/cms/test" class="com.lashou.oa.cms.web.TestController"></bean>
 	<bean name="/cms/databind" class="com.lashou.oa.cms.web.TestPropertyEditorController"/>
+	
+	
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">  
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+		<property name="validationMessageSource" ref="messageSource"/>  
+	</bean>   	
+	
+	<context:component-scan base-package="com.lashou.oa"/>
+	<mvc:annotation-driven validator="validator"/>
+	<mvc:default-servlet-handler/>
+	
 </beans>
