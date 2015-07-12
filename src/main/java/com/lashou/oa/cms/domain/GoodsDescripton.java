@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -24,9 +24,9 @@ public class GoodsDescripton implements Serializable {
 	private Goods goods;
 	
 	@Id
-	@GenericGenerator(name="foreignKey", strategy="foreign", parameters=@Parameter(name="property", value="goods"))  
-    @GeneratedValue(generator="foreignKey", strategy=GenerationType.IDENTITY)
 	@Column(name="goods_id")
+	@GeneratedValue(generator="foreignKey")
+	@GenericGenerator(name="foreignKey", strategy="foreign", parameters=@Parameter(name="property", value="goods"))  
 	public Integer getGoodsId() {
 		return goodsId;
 	}
@@ -35,6 +35,7 @@ public class GoodsDescripton implements Serializable {
 	}
 	
 	@Lob
+	@Column(name="description")
 	public String getDescription() {
 		return description;
 	}
@@ -42,6 +43,7 @@ public class GoodsDescripton implements Serializable {
 		this.description = description;
 	}
 	
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "desc")
 	public Goods getGoods() {
 		return goods;
 	}

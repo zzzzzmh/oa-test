@@ -5,7 +5,6 @@ import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,8 +19,9 @@ import javax.persistence.Transient;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+import javax.persistence.Entity;
 
-@Entity
+@Entity /*(dynamicUpdate=true)*/
 @Table(name="think_goods")
 public class Goods implements java.io.Serializable {
 	
@@ -41,7 +41,7 @@ public class Goods implements java.io.Serializable {
 	private Integer cityId;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="goods_id")
 	public Integer getGoodsId() {
 		return goodsId;
@@ -102,18 +102,17 @@ public class Goods implements java.io.Serializable {
 		this.addTime = addTime;
 	}
 	
-	@OneToOne(cascade={CascadeType.ALL},fetch=FetchType.LAZY,optional=false)
-	@PrimaryKeyJoinColumn
+	@OneToOne(cascade={CascadeType.ALL},fetch=FetchType.LAZY, optional=false)
+	@PrimaryKeyJoinColumn(name="goods_id")
 	public GoodsDescripton getDesc() {
 		return desc;
 	}
-	
 	public void setDesc(GoodsDescripton desc) {
 		this.desc = desc;
 	}
-	/*
+	
+	//http://www.doc88.com/p-538467175318.html
 	public String toString() {
 		return ReflectionToStringBuilder.toString(this); 
 	}
-	*/
 }

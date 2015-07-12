@@ -55,11 +55,13 @@ public class GoodsController {
 			return "cms/goods_add";
 		}
 		
+		
+		
+		
+		
 		System.out.println(goods.toString());
 		System.out.println(goodsDesc.toString());
 		
-		goods.setDesc(goodsDesc);
-		goodsDesc.setGoods(goods);
 	
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;  
@@ -67,6 +69,9 @@ public class GoodsController {
 	        transaction = session.beginTransaction();  
 	        transaction.begin(); 
 	        session.save(goods);
+	        goodsDesc.setGoods(goods);
+	        session.save(goodsDesc); 
+	        goods.setDesc(goodsDesc);
 	        transaction.commit();
 	    } catch (RuntimeException e) {  
 	    	if(transaction != null) {  
@@ -77,7 +82,8 @@ public class GoodsController {
 	    } finally {
 	        session.close();
 	    }
-		return "redirect:cms/goods/success";
+	    System.out.println(goods.getGoodsId());
+		return "redirect:/cms/goods/success";
 	}
 	
 	/*
@@ -128,6 +134,25 @@ public class GoodsController {
 	@RequestMapping("/success")
 	@ResponseBody
 	public String success() {
+		
+		Session session = sessionFactory.openSession();
+		Transaction transaction = null;  
+	    try {
+	        transaction = session.beginTransaction();  
+	        transaction.begin(); 
+	        Goods goods = (Goods) session.load(Goods.class, 8);
+	        System.out.println(goods);
+	        System.out.println(goods.getDesc().getDescription());
+	        transaction.commit();
+	    } catch (RuntimeException e) {  
+	    	if(transaction != null) {  
+	            transaction.rollback();  
+	        }
+	        e.printStackTrace();
+	    } finally {
+	        session.close();
+	    }
+	    
 		return "success";
 	}
 	

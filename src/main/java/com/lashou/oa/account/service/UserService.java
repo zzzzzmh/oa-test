@@ -13,13 +13,14 @@ import org.springframework.stereotype.Service;
 import com.lashou.oa.account.domain.Users;
 
 
-@Service
+//@Service
 public class UserService {
+	/*
 	@Autowired
 	public SessionFactory sessionFactory;
 	@Resource
 	private JdbcTemplate jdbcTemplate;
-	
+	*/
 	public UserService() {
 	}
 	

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.MessageSource;
 import org.springframework.validation.BindException;
@@ -26,6 +27,11 @@ import org.springframework.web.servlet.mvc.AbstractCommandController;
 @SuppressWarnings("deprecation")
 public class TestPropertyEditorController extends AbstractCommandController {
 	
+	@Resource
+	MessageSource messageSource;
+	
+	@Resource
+	private SessionFactory sessionFactory;
 	
 	public TestPropertyEditorController() {
 		setCommandClass(DataBinderTestModel.class);
