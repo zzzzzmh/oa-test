@@ -34,7 +34,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label">category</label>
 										<div class="col-sm-5">
-											<select multiple="" class="form-control" name="category">
+											<select class="form-control" name="category">
 												<option value="2">php开发</option>
 												<option value="3">java开发</option>
 											</select>
@@ -66,6 +66,12 @@
 													<i class="fa fa-square-o small"></i>
 												</label>
 											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label">tags</label>
+										<div class="col-sm-5">
+											<input type="text" class="form-control" name="tagsStr" />
 										</div>
 									</div>
 								</fieldset>

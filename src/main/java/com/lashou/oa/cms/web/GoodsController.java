@@ -1,6 +1,9 @@
 package com.lashou.oa.cms.web;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -21,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.lashou.oa.cms.domain.Goods;
 import com.lashou.oa.cms.domain.GoodsDescripton;
+import com.lashou.oa.cms.domain.Tags;
 //import com.lashou.oa.cms.domain.GoodsValidator;
 import com.lashou.oa.cms.manager.GoodsManager;
 
@@ -45,8 +49,10 @@ public class GoodsController {
 	}
 	
 	@RequestMapping(value="/addSubmit", method=RequestMethod.POST)
-	public String addSubmit(@Valid @ModelAttribute("goods") Goods goods, BindingResult result,
+	@ResponseBody
+	public String addSubmit(@ModelAttribute("tags") String tagsStr, @Valid @ModelAttribute("goods") Goods goods, BindingResult result,
 			@ModelAttribute("goodsDesc") GoodsDescripton goodsDesc) {
+	
 		if(result.hasErrors()) {
 			List<FieldError> errors = result.getFieldErrors();
             for(FieldError err : errors) {
@@ -55,29 +61,39 @@ public class GoodsController {
 			return "cms/goods_add";
 		}
 		
+//		System.out.println(goods.toString());
+//		System.out.println(goodsDesc.toString());
 		
+		Set<Tags> s = new HashSet<Tags>();
+		String[] tags = tagsStr.split(" ");
+		for (int i = 0; i < tags.length; i++) {
+			s.add(new Tags(tags[i],goods));
+		}
 		
-		
-		
-		System.out.println(goods.toString());
-		System.out.println(goodsDesc.toString());
-		
-	
+		goods.setTags(s);
+		goods.setDesc(goodsDesc);
+//		goodsDesc.setGoods(goods);
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;  
 	    try {
+	    	
+//	    	transaction = session.beginTransaction();  
+//	        transaction.begin(); 
+//	        session.save(goods);
+//	        transaction.commit();
+	        
 	        transaction = session.beginTransaction();  
 	        transaction.begin(); 
 	        session.save(goods);
 	        goodsDesc.setGoods(goods);
-	        session.save(goodsDesc); 
 	        goods.setDesc(goodsDesc);
+	        session.save(goodsDesc);
 	        transaction.commit();
+	    	
 	    } catch (RuntimeException e) {  
 	    	if(transaction != null) {  
 	            transaction.rollback();  
 	        }
-	    	
 	        e.printStackTrace();
 	    } finally {
 	        session.close();
@@ -161,6 +177,17 @@ public class GoodsController {
     public void initBinder(DataBinder binder) {  
        binder.setValidator(new GoodsValidator());  
     }
+    CREATE TABLE `goods_tags` (
+	  `goods_id` int(11) NOT NULL,
+	  `tag_id` int(11) NOT NULL
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8
+	
+	CREATE TABLE `think_tags` (
+	  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+	  `tag` varchar(50) NOT NULL,
+	  PRIMARY KEY (`id`)
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8
+	
     */
 	
 }

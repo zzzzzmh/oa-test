@@ -95,27 +95,27 @@ public class UserController {
 			*/
 			long orderId = 150712345678l;
 			
-//			Orders order = new Orders();
-//			order.setOrderId(new Long(orderId));
-//			order.setParentId(new Long(0));
-//			order.setBuyerId(new Integer(10));
-//			order.setSellerId(new Integer(0));
-//			order.setTotalFee(new BigDecimal(100.00));
-//			order.setPayed(new BigDecimal(0));
-//			order.setEpursePayed(new BigDecimal(0));
-//			order.setFreeMoney(new BigDecimal(0));
-//			order.setConveyFee(new BigDecimal(0));
-//			order.setFreeConveyFee(new BigDecimal(0));
-//			order.setStatus(new Short((short)0));
-//			order.setBuyTime(new Date(System.currentTimeMillis()));
-//			order.setInvalidTime(new Date(System.currentTimeMillis()+30*60*1000));
-//			order.setUpdateTime(new Date(System.currentTimeMillis()));
-//			order.setCityId(new Integer(2419));
-//			order.setSource(new Short((short)1));
-//			order.setAddressId(new Integer(231234));
-//			order.setDel(new Short((short)0));
-//			order.setPayType(new Short((short)0));
-//			session.save(order);
+			Orders order = new Orders();
+			order.setOrderId(new Long(orderId));
+			order.setParentId(new Long(0));
+			order.setBuyerId(new Integer(10));
+			order.setSellerId(new Integer(0));
+			order.setTotalFee(new BigDecimal(100.00));
+			order.setPayed(new BigDecimal(0));
+			order.setEpursePayed(new BigDecimal(0));
+			order.setFreeMoney(new BigDecimal(0));
+			order.setConveyFee(new BigDecimal(0));
+			order.setFreeConveyFee(new BigDecimal(0));
+			order.setStatus(new Short((short)0));
+			order.setBuyTime(new Date(System.currentTimeMillis()));
+			order.setInvalidTime(new Date(System.currentTimeMillis()+30*60*1000));
+			order.setUpdateTime(new Date(System.currentTimeMillis()));
+			order.setCityId(new Integer(2419));
+			order.setSource(new Short((short)1));
+			order.setAddressId(new Integer(231234));
+			order.setDel(new Short((short)0));
+			order.setPayType(new Short((short)0));
+			session.save(order);
 			
 			//long orderId2 = 150712345679l;
 			Orders order2 = new Orders();
@@ -253,5 +253,11 @@ public class UserController {
 		} finally {
 			session.close();
 		}
+	}
+	
+	@RequestMapping("/testMany")
+	public void testMany() {
+		
+		
 	}
 }
