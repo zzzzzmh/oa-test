@@ -3,15 +3,21 @@ package com.lashou.oa.cs.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Cascade;
 
 
 @Entity /*(dynamicUpdate=true)*/
@@ -92,6 +98,9 @@ public class Orders implements Serializable {
 	@Column(name="del")
 	private Short del;
 	
+	@OneToMany(mappedBy="order",targetEntity=OrderItem.class,fetch=FetchType.LAZY)
+	@Cascade(value=org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+	private Set<OrderItem> items = new HashSet<OrderItem>();
 
 	public Long getOrderId() {
 		return orderId;
@@ -267,5 +276,18 @@ public class Orders implements Serializable {
 
 	public void setDel(Short del) {
 		this.del = del;
+	}
+
+	public Set<OrderItem> getItems() {
+		return items;
+	}
+
+	public void setItems(Set<OrderItem> items) {
+		this.items = items;
+	}
+	
+	public void addItem(OrderItem item) {
+		 item.setOrders(this);
+		 this.items.add(item);
 	}
 }

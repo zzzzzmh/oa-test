@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 //import org.hibernate.annotations.Entity;
 import javax.persistence.Entity;
@@ -60,7 +59,7 @@ public class OrderItem implements Serializable {
 	@ManyToOne(targetEntity=Orders.class, optional=true, fetch=FetchType.LAZY) //cascade={CascadeType.ALL},
 	@JoinColumn(name="order_id")
 	@Cascade(value=org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-	private Orders orders;
+	private Orders order;
 	
 	public Long getDetailId() {
 		return detailId;
@@ -134,11 +133,11 @@ public class OrderItem implements Serializable {
 		this.payTime = payTime;
 	}
 
-	public Orders getOrders() {
-		return orders;
+	public Orders getOrder() {
+		return order;
 	}
 
-	public void setOrders(Orders orders) {
-		this.orders = orders;
+	public void setOrders(Orders order) {
+		this.order = order;
 	}
 }
